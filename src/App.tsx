@@ -118,8 +118,8 @@ const COUNTRIES = [
     curriculum: 'ESO, Bachillerato, IB, IGCSE',
     details: 'Our Spanish program covers both the local ESO/Bachillerato requirements and international curricula common in expat communities.',
     exams: ['Selectividad', 'ESO', 'IB'],
-    image: 'https://images.unsplash.com/photo-1583341612074-ccea5cd64f6a?auto=format&fit=crop&q=80&w=800',
-    secondaryImage: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&q=80&w=800'
+    image: 'https://images.unsplash.com/photo-1543783232-179f48d7ceb5?auto=format&fit=crop&q=80&w=800',
+    secondaryImage: 'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&q=80&w=800'
   },
   { 
     id: 'france',
@@ -144,11 +144,11 @@ const COUNTRIES = [
 ];
 
 const SUBJECTS = [
-  { name: 'Mathematics', icon: '📐', color: 'bg-blue-500' },
-  { name: 'Physics', icon: '⚛️', color: 'bg-purple-500' },
-  { name: 'Chemistry', icon: '🧪', color: 'bg-emerald-500' },
-  { name: 'Biology', icon: '🧬', color: 'bg-rose-500' },
-  { name: 'English', icon: '📚', color: 'bg-amber-500' },
+  { name: 'Mathematics', icon: '📐', color: 'bg-blue-500', image: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=400' },
+  { name: 'Physics', icon: '⚛️', color: 'bg-purple-500', image: 'https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?auto=format&fit=crop&q=80&w=400' },
+  { name: 'Chemistry', icon: '🧪', color: 'bg-emerald-500', image: 'https://images.unsplash.com/photo-1532187863486-abf9d3c3c956?auto=format&fit=crop&q=80&w=400' },
+  { name: 'Biology', icon: '🧬', color: 'bg-rose-500', image: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&q=80&w=400' },
+  { name: 'English', icon: '📚', color: 'bg-amber-500', image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=400' },
 ];
 
 // --- Components ---
@@ -445,11 +445,12 @@ const HomePage = () => {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {SUBJECTS.map((sub) => (
-                  <div key={sub.name} className="flex items-center gap-4 p-5 bg-white rounded-3xl border border-slate-200 shadow-sm hover:border-indigo-200 transition-colors">
-                    <div className={`w-12 h-12 rounded-2xl ${sub.color} flex items-center justify-center text-2xl shadow-lg shadow-slate-100`}>
+                  <div key={sub.name} className="group flex items-center gap-4 p-4 bg-white rounded-3xl border border-slate-200 shadow-sm hover:border-indigo-200 transition-all hover:shadow-md overflow-hidden relative">
+                    <img src={sub.image} alt={sub.name} className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-10 transition-opacity" referrerPolicy="no-referrer" />
+                    <div className={`relative z-10 w-12 h-12 rounded-2xl ${sub.color} flex items-center justify-center text-2xl shadow-lg shadow-slate-100`}>
                       {sub.icon}
                     </div>
-                    <span className="font-bold text-slate-800">{sub.name}</span>
+                    <span className="relative z-10 font-bold text-slate-800">{sub.name}</span>
                   </div>
                 ))}
               </div>
@@ -489,6 +490,45 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tutors Section */}
+      <section className="py-32 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl lg:text-5xl font-black mb-6">Meet Our Expert Tutors</h2>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Learn from the best. Our tutors are subject matter experts with years of experience in international curricula.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {[
+              { name: 'Dr. Anjali Sharma', role: 'Mathematics Expert', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400' },
+              { name: 'Prof. Rajesh Iyer', role: 'Physics Specialist', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400' },
+              { name: 'Ms. Priya Verma', role: 'Biology & Chemistry', img: 'https://images.unsplash.com/photo-1580894732230-2867e631da28?auto=format&fit=crop&q=80&w=400' }
+            ].map((tutor, idx) => (
+              <motion.div 
+                key={tutor.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="group text-center"
+              >
+                <div className="relative mb-6 inline-block">
+                  <div className="absolute inset-0 bg-indigo-600 rounded-[2.5rem] rotate-6 group-hover:rotate-12 transition-transform" />
+                  <img 
+                    src={tutor.img} 
+                    alt={tutor.name} 
+                    className="relative w-64 h-64 object-cover rounded-[2.5rem] shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-500"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <h4 className="text-2xl font-bold mb-2">{tutor.name}</h4>
+                <p className="text-indigo-400 font-medium">{tutor.role}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -573,7 +613,7 @@ const CountryPage = () => {
           className="absolute inset-0 w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[1px]" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <motion.div
